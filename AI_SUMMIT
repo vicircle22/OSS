@@ -1,9 +1,4 @@
-아래 내용 그대로 붙여 넣으시면 됩니다.
-
----
-
-## 프로젝트명  
-**AI Pocket - AI 정보 요약 및 실행 관리 서비스**
+ AI SUMMIT
 
 ## 문제정의  
 최근 생성형 AI 기술이 빠르게 발전하면서 Instagram, Threads, 블로그, 뉴스, 개발 커뮤니티 등 다양한 플랫폼에서 새로운 AI 관련 정보가 지속적으로 공유되고 있다. 사용자는 유용한 정보를 발견하면 게시물을 저장하거나 링크를 따로 보관하지만, 저장된 정보가 많아질수록 다시 확인하지 않거나 핵심 내용을 파악하는 데 많은 시간이 소요되는 문제가 있다.
@@ -25,9 +20,8 @@ AI가 저장된 콘텐츠를 분석하여 사용자가 실제로 수행할 수 �
 Frontend: React, TypeScript, HTML, CSS, Axios  
 Backend: Java, Spring Boot, Spring Data JPA, REST API  
 Database: PostgreSQL  
-AI: OpenAI API 또는 Gemini API 등 LLM API  
-Development Tools: Git, GitHub, IntelliJ IDEA, VS Code, Postman  
-Deployment: Vercel, Render 또는 AWS 활용 예정
+AI: OpenAI API  
+Deployment: Vercel 및 AWS 활용 예정
 
 ## 16주 마일스톤  
 
