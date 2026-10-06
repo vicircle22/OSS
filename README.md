@@ -1,15 +1,15 @@
-# OSS — AI Pocket
+# OSS — AI SUMMIT
 
 OSS 개발 과목 프로젝트 REPO
 
 컴퓨터공학과 이승원, 컴퓨터공학과 이규호 공동 작업
 
-## AI Pocket — 기획 산출물
+## AI SUMMIT — 기획 산출물
 
 AI 정보 저장·구조화 요약·Action Item 관리 서비스의 16주 MVP 설계입니다.
 
-- [PRD](docs/AI-Pocket-PRD.md): 사용자·범위·요구사항·인수 조건·데이터 모델·API·16주 완료 기준
-- [와이어프레임 화면 명세](docs/AI-Pocket-Wireframes.md): 네 화면, 모바일 배치, 상태·상호작용, 검토 시나리오
+- [PRD](docs/AI-SUMMIT-PRD.md): 사용자·범위·요구사항·인수 조건·데이터 모델·API·16주 완료 기준
+- [와이어프레임 화면 명세](docs/AI-SUMMIT-Wireframes.md): 네 화면, 모바일 배치, 상태·상호작용, 검토 시나리오
 - [인터랙티브 와이어프레임](docs/wireframes/index.html): 설치나 외부 라이브러리 없이 브라우저에서 열기
 
 `docs/wireframes/index.html`을 브라우저에서 열고 화면 선택·Desktop/Mobile·상태 예시로 검토할 수 있습니다. 일반 버튼으로도 검색·저장·편집·행동 완료·삭제 흐름을 확인할 수 있습니다. 예시 데이터만 사용하며 새로고침하면 초기화됩니다.
