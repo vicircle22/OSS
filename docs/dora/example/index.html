@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI SUMMIT DORA Dashboard</title>
+<style>body{margin:0;background:#0b1220;color:#e9efff;font:16px/1.7 system-ui,sans-serif}main{max-width:1200px;margin:auto;padding:20px}svg{width:100%;height:auto}a{color:#66e0cf}section{background:#142238;border:1px solid #263b58;border-radius:12px;padding:24px;margin:18px 0}h2{margin:0 0 12px}</style>
+<main><svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+<title id="title">AI SUMMIT DORA Dashboard</title>
+<desc id="desc">DORA 4개 지표와 주간 성공 배포 수. 기록이 없으면 데이터 없음으로 표시.</desc>
+<rect width="1200" height="650" fill="#0b1220"/>
+<g font-family="Arial, Noto Sans KR, sans-serif" fill="#e9efff">
+<text x="42" y="56" font-size="28" font-weight="700">AI SUMMIT · DORA Dashboard</text>
+<text x="42" y="88" font-size="14" fill="#93a9c4">예시 데이터 · 실제 운영 성과 아님 | production | 28일 관찰</text>
+<text x="42" y="115" font-size="13" fill="#93a9c4">2026-09-14T00:00:00Z → 2026-10-12T00:00:00Z (UTC)</text>
+<rect x="42" y="143" width="268" height="147" rx="14" fill="#142238" stroke="#263b58"/>
+<text x="59" y="175" font-size="16">Lead Time</text>
+<text x="59" y="226" font-size="27" fill="#66e0cf" font-weight="700">5.00 h</text>
+<text x="59" y="264" font-size="12" fill="#a7b7cc">커밋 → 성공 배포 · 중앙값</text>
+<rect x="324" y="143" width="268" height="147" rx="14" fill="#142238" stroke="#263b58"/>
+<text x="341" y="175" font-size="16">Deployment Frequency</text>
+<text x="341" y="226" font-size="27" fill="#66e0cf" font-weight="700">0.21 /day</text>
+<text x="341" y="264" font-size="12" fill="#a7b7cc">성공 운영 배포 / 일</text>
+<rect x="606" y="143" width="268" height="147" rx="14" fill="#142238" stroke="#263b58"/>
+<text x="623" y="175" font-size="16">MTTR</text>
+<text x="623" y="226" font-size="27" fill="#66e0cf" font-weight="700">2.00 h</text>
+<text x="623" y="264" font-size="12" fill="#a7b7cc">장애 이슈 생성 → 종료 · 평균</text>
+<rect x="888" y="143" width="268" height="147" rx="14" fill="#142238" stroke="#263b58"/>
+<text x="905" y="175" font-size="16">Change Failure Rate</text>
+<text x="905" y="226" font-size="27" fill="#66e0cf" font-weight="700">16.7%</text>
+<text x="905" y="264" font-size="12" fill="#a7b7cc">장애 연결 배포 / 성공 배포</text>
+<text x="42" y="331" font-size="19" font-weight="700">주간 성공 운영 배포 수</text>
+<text x="42" y="383" font-size="13" fill="#a7b7cc">2026-09-14</text>
+<rect x="165" y="365" width="880" height="25" rx="5" fill="#142238"/>
+<rect x="165" y="365" width="385.0" height="25" rx="5" fill="#36baa9"/>
+<text x="1070" y="383" font-size="14">1건</text>
+<text x="42" y="426" font-size="13" fill="#a7b7cc">2026-09-21</text>
+<rect x="165" y="408" width="880" height="25" rx="5" fill="#142238"/>
+<rect x="165" y="408" width="770.0" height="25" rx="5" fill="#36baa9"/>
+<text x="1070" y="426" font-size="14">2건</text>
+<text x="42" y="469" font-size="13" fill="#a7b7cc">2026-09-28</text>
+<rect x="165" y="451" width="880" height="25" rx="5" fill="#142238"/>
+<rect x="165" y="451" width="385.0" height="25" rx="5" fill="#36baa9"/>
+<text x="1070" y="469" font-size="14">1건</text>
+<text x="42" y="512" font-size="13" fill="#a7b7cc">2026-10-05</text>
+<rect x="165" y="494" width="880" height="25" rx="5" fill="#142238"/>
+<rect x="165" y="494" width="770.0" height="25" rx="5" fill="#36baa9"/>
+<text x="1070" y="512" font-size="14">2건</text>
+<text x="42" y="574" font-size="13" fill="#a7b7cc">기록이 없으면 수집 연결을 확인하세요. MTTR은 이슈 기록 기반이며, 장애가 없으면 값이 없습니다.</text>
+<text x="42" y="601" font-size="13" fill="#a7b7cc">측정 정의·표본 수·장애 연결·원본 근거는 보고서와 metrics.json에서 확인할 수 있습니다.</text>
+<text x="42" y="628" font-size="12" fill="#7188a3">vicircle22/OSS · 2026-10-12T00:00:00Z</text>
+</g></svg><section><h2>측정 정의 및 근거</h2><ul><li><strong>Lead Time</strong>: 이전 성공 배포 대비 새 커밋의 committer 시각 → 최초 성공 운영 배포 시각의 중앙값</li><li><strong>Deployment Frequency</strong>: 관찰 기간의 성공 운영 배포 수 / 관찰 일수</li><li><strong>MTTR</strong>: 기간 내 종료된 배포 관련 incident 생성 → 종료 시간 평균 (이슈 기반 대리지표)</li><li><strong>Change Failure Rate</strong>: 기간 내 성공 배포 중 incident에 연결된 고유 배포 수 / 성공 운영 배포 수 × 100</li></ul><p>GitHub에 기록된 대상 환경의 성공 배포와 incident 이슈만 측정합니다. 기록 누락 시 실제 운영 성과를 판단할 수 없습니다.</p><p><a href="metrics.json">JSON 원본</a> · <a href="report.md">주간 보고서</a></p></section></main></html>
