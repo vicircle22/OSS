@@ -36,7 +36,7 @@
 
 - 자동: 매주 월요일 09:00 KST, deployment status 변경, incident 이슈 변경.
 - 수동: Actions → DORA Metrics → Run workflow.
-- 워크플로우 변경 push 시 첫 수집 실행. 수집 전 계산 테스트를 수행한다.
+- main 및 구현 검증 브랜치 `feat/dora-automation`의 워크플로우 변경 push 시 첫 수집 실행. 수집 전 계산 테스트를 수행한다. 예약·배포·장애 이벤트는 main에 병합한 뒤 활성화된다.
 - 토큰 권한은 contents/deployments/issues **read**. 저장소에 자동 commit/push하지 않는다.
 - 보고서는 실행 Summary와 아티팩트에 자동 생성하며 90일 보존한다. 장기 보관 시 다운로드한다.
 - API 오류 또는 페이지 한도 초과는 실행 실패로 표시하며 일부 데이터를 정상 수집처럼 출력하지 않는다.
@@ -60,7 +60,7 @@ Git 커밋이 파일의 스냅샷이며, 백업 브랜치와 태그는 그 커�
 
 `https://github.com/vicircle22/OSS/archive/refs/tags/backup-pre-dora-20261012-ebdd019.zip`
 
-이 변경을 되돌릴 때는 추가된 DORA 기능 커밋을 `git revert <DORA-기능-커밋-SHA>`로 취소하고 push한다. 이후 다른 변경이 있다면 해당 커밋만 revert하고 충돌을 검토한다. 백업 태그로 새 작업 브랜치를 만들려면:
+이 변경을 되돌릴 때는 PR의 merge/squash 커밋을 `git revert <DORA-PR-커밋-SHA>`로 취소하고 push한다. merge commit이면 `git revert -m 1 <merge-SHA>`를 사용한다. 이후 다른 변경이 있다면 해당 커밋만 revert하고 충돌을 검토한다. 백업 태그로 새 작업 브랜치를 만들려면:
 
 ```bash
 git fetch origin --tags

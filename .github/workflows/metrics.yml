@@ -6,7 +6,7 @@ on:
   schedule:
     - cron: '0 0 * * 1' # 매주 월요일 09:00 KST
   push:
-    branches: [main]
+    branches: [main, feat/dora-automation]
     paths: ['.github/workflows/metrics.yml', 'scripts/dora/**', 'tests/test_dora.py']
   deployment_status:
   issues:
@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event_name == 'push' && github.sha || 'main' }}
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
