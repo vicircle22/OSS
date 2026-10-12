@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "data_mode": "example",
+  "repository": "vicircle22/OSS",
+  "environment": "production",
+  "generated_at": "2026-10-12T00:00:00Z",
+  "window": {
+    "start": "2026-09-14T00:00:00Z",
+    "end": "2026-10-12T00:00:00Z",
+    "days": 28
+  },
+  "metrics": {
+    "lead_time_seconds": 18000,
+    "deployment_frequency_per_day": 0.21428571428571427,
+    "mttr_seconds": 7200.0,
+    "change_failure_rate_percent": 16.666666666666664,
+    "deployment_count": 6,
+    "lead_time_sample_count": 5,
+    "failed_deployment_count": 1,
+    "resolved_incident_count": 1,
+    "open_incident_count": 0
+  },
+  "weekly": [
+    {
+      "start": "2026-09-14T00:00:00Z",
+      "end": "2026-09-21T00:00:00Z",
+      "lead_time_seconds": null,
+      "deployment_frequency_per_day": 0.14285714285714285,
+      "mttr_seconds": null,
+      "change_failure_rate_percent": 0.0,
+      "deployment_count": 1,
+      "lead_time_sample_count": 0,
+      "failed_deployment_count": 0,
+      "resolved_incident_count": 0,
+      "open_incident_count": 0
+    },
+    {
+      "start": "2026-09-21T00:00:00Z",
+      "end": "2026-09-28T00:00:00Z",
+      "lead_time_seconds": 25200.0,
+      "deployment_frequency_per_day": 0.2857142857142857,
+      "mttr_seconds": null,
+      "change_failure_rate_percent": 0.0,
+      "deployment_count": 2,
+      "lead_time_sample_count": 2,
+      "failed_deployment_count": 0,
+      "resolved_incident_count": 0,
+      "open_incident_count": 0
+    },
+    {
+      "start": "2026-09-28T00:00:00Z",
+      "end": "2026-10-05T00:00:00Z",
+      "lead_time_seconds": 14400,
+      "deployment_frequency_per_day": 0.14285714285714285,
+      "mttr_seconds": null,
+      "change_failure_rate_percent": 0.0,
+      "deployment_count": 1,
+      "lead_time_sample_count": 1,
+      "failed_deployment_count": 0,
+      "resolved_incident_count": 0,
+      "open_incident_count": 0
+    },
+    {
+      "start": "2026-10-05T00:00:00Z",
+      "end": "2026-10-12T00:00:00Z",
+      "lead_time_seconds": 14400.0,
+      "deployment_frequency_per_day": 0.2857142857142857,
+      "mttr_seconds": 7200.0,
+      "change_failure_rate_percent": 50.0,
+      "deployment_count": 2,
+      "lead_time_sample_count": 2,
+      "failed_deployment_count": 1,
+      "resolved_incident_count": 1,
+      "open_incident_count": 0
+    }
+  ],
+  "warnings": [],
+  "definitions": {
+    "Lead Time": "이전 성공 배포 대비 새 커밋의 committer 시각 → 최초 성공 운영 배포 시각의 중앙값",
+    "Deployment Frequency": "관찰 기간의 성공 운영 배포 수 / 관찰 일수",
+    "MTTR": "기간 내 종료된 배포 관련 incident 생성 → 종료 시간 평균 (이슈 기반 대리지표)",
+    "Change Failure Rate": "기간 내 성공 배포 중 incident에 연결된 고유 배포 수 / 성공 운영 배포 수 × 100"
+  },
+  "coverage": "GitHub에 기록된 대상 환경의 성공 배포와 incident 이슈만 측정합니다. 기록 누락 시 실제 운영 성과를 판단할 수 없습니다.",
+  "sources": {
+    "successful_deployments": [
+      {
+        "id": 101,
+        "sha": "example-sha-1",
+        "deployed_at": "2026-09-18T12:00:00Z"
+      },
+      {
+        "id": 102,
+        "sha": "example-sha-2",
+        "deployed_at": "2026-09-22T12:00:00Z"
+      },
+      {
+        "id": 103,
+        "sha": "example-sha-3",
+        "deployed_at": "2026-09-27T12:00:00Z"
+      },
+      {
+        "id": 104,
+        "sha": "example-sha-4",
+        "deployed_at": "2026-10-01T12:00:00Z"
+      },
+      {
+        "id": 105,
+        "sha": "example-sha-5",
+        "deployed_at": "2026-10-07T12:00:00Z"
+      },
+      {
+        "id": 106,
+        "sha": "example-sha-6",
+        "deployed_at": "2026-10-10T12:00:00Z"
+      }
+    ],
+    "incidents": [
+      {
+        "number": 1,
+        "deployment_id": 105,
+        "opened_at": "2026-10-07T13:00:00Z",
+        "closed_at": "2026-10-07T15:00:00Z",
+        "url": "https://example.com/incident-1"
+      }
+    ],
+    "lead_samples": [
+      {
+        "sha": "example-commit-1",
+        "deployment_id": 102,
+        "committed_at": "2026-09-22T06:00:00Z",
+        "deployed_at": "2026-09-22T12:00:00Z",
+        "seconds": 21600
+      },
+      {
+        "sha": "example-commit-2",
+        "deployment_id": 103,
+        "committed_at": "2026-09-27T04:00:00Z",
+        "deployed_at": "2026-09-27T12:00:00Z",
+        "seconds": 28800
+      },
+      {
+        "sha": "example-commit-3",
+        "deployment_id": 104,
+        "committed_at": "2026-10-01T08:00:00Z",
+        "deployed_at": "2026-10-01T12:00:00Z",
+        "seconds": 14400
+      },
+      {
+        "sha": "example-commit-4",
+        "deployment_id": 105,
+        "committed_at": "2026-10-07T07:00:00Z",
+        "deployed_at": "2026-10-07T12:00:00Z",
+        "seconds": 18000
+      },
+      {
+        "sha": "example-commit-5",
+        "deployment_id": 106,
+        "committed_at": "2026-10-10T09:00:00Z",
+        "deployed_at": "2026-10-10T12:00:00Z",
+        "seconds": 10800
+      }
+    ]
+  }
+}

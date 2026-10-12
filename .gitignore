@@ -14,3 +14,8 @@ target/
 *.iml
 .DS_Store
 Thumbs.db
+
+# Python caches and local DORA collection output
+__pycache__/
+*.pyc
+dora-output/

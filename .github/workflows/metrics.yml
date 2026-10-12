@@ -1,22 +1,53 @@
 # .github/workflows/metrics.yml
-name: Track Lead Time
+name: DORA Metrics
 
-on: # WHEN이랑 동일하게 PR이 병합되었을 때만 실행되도록 설정
-  pull_request:
-    types: [closed]
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1' # 매주 월요일 09:00 KST
+  push:
+    branches: [main, feat/dora-automation]
+    paths: ['.github/workflows/metrics.yml', 'scripts/dora/**', 'tests/test_dora.py']
+  deployment_status:
+  issues:
+    types: [opened, edited, labeled, unlabeled, closed, reopened, deleted]
+
+permissions:
+  contents: read
+  deployments: read
+  issues: read
+
+concurrency:
+  group: dora-metrics
+  cancel-in-progress: false
 
 jobs:
-  track-lead-time: #해당 부분은 이름 변경 가능 
-    # PR이 병합되었을 때만 실행
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
+  collect:
+    if: github.event_name != 'issues' || contains(github.event.issue.labels.*.name, 'incident') || github.event.label.name == 'incident'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
-      - name: Calculate Lead Time
-        run: |
-          FIRST_COMMIT_TIME="${{ github.event.pull_request.created_at }}"
-          MERGE_TIME="${{ github.event.pull_request.merged_at }}"
-
-          # 시간 차이 계산 (초 단위)
-          LEAD_TIME=$(($(date -d "$MERGE_TIME" +%s) - $(date -d "$FIRST_COMMIT_TIME" +%s)))
-
-          echo "Lead Time: $LEAD_TIME seconds"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event_name == 'push' && github.sha || 'main' }}
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Test metric calculations
+        run: python -m unittest discover -s tests -v
+      - name: Collect four DORA metrics
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          DORA_ENVIRONMENT: ${{ vars.DORA_ENVIRONMENT || 'production' }}
+        run: python scripts/dora/collect.py --out dora-output
+      - name: Publish weekly report in run summary
+        run: cat dora-output/report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Save JSON, report and dashboard artifact
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: dora-metrics-${{ github.run_id }}
+          path: dora-output/
+          retention-days: 90
+          if-no-files-found: error
