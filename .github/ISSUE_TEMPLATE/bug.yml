@@ -1,0 +1,61 @@
+name: Bug report
+description: 재현 가능한 결함과 기대 동작 기록
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        재현 가능한 관찰 결과를 기록해주세요. API 키·개인정보·토큰을 첨부하지 않습니다.
+        [PRD](https://github.com/vicircle22/OSS/blob/main/docs/AI-SUMMIT-PRD.md)의 인수 조건과 비교하고 기존 마일스톤·Projects에 연결합니다.
+  - type: textarea
+    id: steps
+    attributes:
+      label: 재현 절차
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대 동작
+      placeholder: PRD·화면 명세에 따라 어떤 결과가 나와야 하나요?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 실제 동작과 근거
+      description: 오류 메시지·스크린샷·익명화한 로그·API 응답을 첨부합니다.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 실행 환경 및 버전
+      placeholder: 브라우저·OS·커밋 SHA·Frontend/Backend 버전
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 영향도
+      options:
+        - 핵심 흐름 진행 불가
+        - 일부 기능 또는 데이터 일관성 문제
+        - 화면·접근성·문구 문제
+    validations:
+      required: true
+  - type: textarea
+    id: regression
+    attributes:
+      label: 수정 완료 검증 기준
+      value: |
+        - [ ] 재현 절차에서 기대 동작을 확인한다.
+        - [ ] 관련 정상 흐름에 회귀가 없는지 확인한다.
+        - [ ] PR과 검증 결과를 첨부한다.
+    validations:
+      required: true
