@@ -4,6 +4,17 @@ OSS 개발 과목 프로젝트 REPO
 
 컴퓨터공학과 이승원, 컴퓨터공학과 이규호 공동 작업
 
+## 4주차 — GitHub Flow와 코드 리뷰
+
+- [기여·브랜치·커밋·검증·병합 안내](CONTRIBUTING.md)
+- [공동 검토 담당자](.github/CODEOWNERS)
+- [PR #17: Conventional Commits와 PR 제목 검사](https://github.com/vicircle22/OSS/pull/17)
+- [PR #18: PR 템플릿·리뷰 가이드](https://github.com/vicircle22/OSS/pull/18)
+
+서로 다른 PR 3건에 실제 검토 근거와 `[MUST]`·`[SHOULD]` 피드백을 남깁니다.
+AI·작성자 자체 점검과 동료의 독립 리뷰는 구분하며, 동료 리뷰 후 병합합니다.
+보호 규칙은 저장소 소유자 설정이 필요하며, 문서·CODEOWNERS만으로 강제되지 않습니다.
+
 ## AI SUMMIT — 기획 산출물
 
 AI 정보 저장·구조화 요약·Action Item 관리 서비스의 16주 MVP 설계입니다.
