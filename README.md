@@ -8,6 +8,7 @@ OSS 개발 과목 프로젝트 REPO
 
 - [기여·브랜치·커밋·검증·병합 안내](CONTRIBUTING.md)
 - [공동 검토 담당자](.github/CODEOWNERS)
+- [4주차 작업·리뷰·검증 기록과 남은 절차](docs/Week4-Submission.md)
 - [PR #17: Conventional Commits와 PR 제목 검사](https://github.com/vicircle22/OSS/pull/17)
 - [PR #18: PR 템플릿·리뷰 가이드](https://github.com/vicircle22/OSS/pull/18)
 
