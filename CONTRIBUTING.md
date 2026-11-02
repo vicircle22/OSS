@@ -40,7 +40,8 @@ Python 3.12 이상과 Git이 필요합니다. 현재 테스트는 표준 라이�
 ```bash
 python3 -m unittest discover -s tests -v
 git diff --check
-git add <변경한-파일>
+# 아래 파일명은 실제 수정한 파일 경로로 바꿉니다.
+git add -- '변경한-파일'
 git commit -m "feat: 변경 목적"
 git push -u origin feature/short-purpose
 ```
