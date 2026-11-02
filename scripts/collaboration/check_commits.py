@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check new non-merge commit subjects and a PR title against the team policy."""
+"""Check commit/PR headers only; bodies, footers and SemVer meaning are not validated."""
 import argparse
 import re
 import subprocess
