@@ -4,6 +4,13 @@ OSS 개발 과목 프로젝트 REPO
 
 컴퓨터공학과 이승원, 컴퓨터공학과 이규호 공동 작업
 
+## 6주차 — 오픈소스 실습 및 Inner Source 계획
+
+- [MIT 라이선스](LICENSE)에서 사용·수정·재배포 조건을 확인할 수 있습니다.
+- [기여 안내](CONTRIBUTING.md)에서 이슈 등록, 로컬 검증, PR 제출 절차를 확인할 수 있습니다.
+- [행동 강령](CODE_OF_CONDUCT.md)에서 협업 기준과 위반 신고 절차를 확인할 수 있습니다.
+- [라이선스 비교 및 Inner Source 로드맵](docs/Week6-OSS-Inner-Source.md)에 선택 과제를 정리했습니다.
+
 ## 5주차 — 비동기 협업 체계
 
 - [제출용 Wiki 홈](https://github.com/vicircle22/OSS/wiki)
