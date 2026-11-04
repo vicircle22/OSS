@@ -4,6 +4,14 @@ OSS 개발 과목 프로젝트 REPO
 
 컴퓨터공학과 이승원, 컴퓨터공학과 이규호 공동 작업
 
+## 5주차 — 비동기 협업 체계
+
+- [제출용 Wiki 홈](https://github.com/vicircle22/OSS/wiki)
+- [Getting Started](https://github.com/vicircle22/OSS/wiki/Getting-Started) · [Development Guide](https://github.com/vicircle22/OSS/wiki/Development-Guide) · [Troubleshooting](https://github.com/vicircle22/OSS/wiki/Troubleshooting)
+- [Wiki 문서 사본](docs/wiki/) · [ADR 템플릿과 기록](docs/adr/)
+- [자동응답·SLA·주간 요약 초안](docs/automation/) · [RFC·카테고리 설계 초안](docs/rfc/0001-async-response-policy.md)
+- [실행·검증·선택 항목 상태](docs/Week5-Submission.md)
+
 ## 4주차 — GitHub Flow와 코드 리뷰
 
 - [기여·브랜치·커밋·검증·병합 안내](CONTRIBUTING.md)
