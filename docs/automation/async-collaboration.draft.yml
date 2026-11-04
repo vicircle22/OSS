@@ -1,0 +1,70 @@
+# DRAFT ONLY: outside .github/workflows; this file does not run automatically.
+# Review with the team, then copy into .github/workflows to activate read-only reports.
+# Actual bot acknowledgement also needs ASYNC_AUTOMATION_ENABLED=true; default is off.
+name: Async Collaboration Draft
+
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+  schedule:
+    - cron: '0 0 * * 1' # Monday 09:00 KST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: async-collaboration-draft
+  cancel-in-progress: false
+
+jobs:
+  acknowledge:
+    if: vars.ASYNC_AUTOMATION_ENABLED == 'true' && github.event_name == 'issues' && github.event.action == 'opened' && github.event.issue.user.type != 'Bot'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Acknowledge once on issue creation
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          cat > "$RUNNER_TEMP/ack.md" <<'EOF'
+          [자동 접수 안내] 이슈를 기록했습니다. 담당자의 검토·답변 완료를 뜻하지 않습니다.
+          재현 방법, 기대/실제 결과, 환경, 시도한 방법, 필요한 결정과 희망 응답 시각을 함께 남겨 주세요.
+          토큰·API 키·개인정보는 올리지 마세요. 봇 접수는 사람 응답 SLA에서 제외합니다.
+          EOF
+          gh issue comment "$ISSUE_NUMBER" --repo "$REPO" --body-file "$RUNNER_TEMP/ack.md"
+
+  weekly-and-sla-report:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      issues: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # same pin as PR Quality
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - name: Run offline tests
+        run: python -m unittest discover -s tests -v
+      - name: Collect read-only response SLA and weekly issue summary
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python -m scripts.collaboration.async_report --out "$RUNNER_TEMP/async-report"
+      - name: Publish report in run summary
+        run: cat "$RUNNER_TEMP/async-report/report.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: async-collaboration-${{ github.run_id }}
+          path: ${{ runner.temp }}/async-report/
+          retention-days: 30
+          if-no-files-found: error
