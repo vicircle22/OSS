@@ -4,6 +4,12 @@ OSS 개발 과목 프로젝트 REPO
 
 컴퓨터공학과 이승원, 컴퓨터공학과 이규호 공동 작업
 
+## 7주차 — Python CI/CD
+
+- [Workflow YAML](.github/workflows/python-ci-cd.yml) · [Actions 실행 내역](https://github.com/vicircle22/OSS/actions/workflows/python-ci-cd.yml)
+- [요구사항·Secrets·Matrix·아티팩트·배포 설명](docs/Week7-Submission.md)
+- [검증된 다운로드 패키지](https://github.com/vicircle22/OSS/releases): Build → 6개 Python/OS Lint·Test → main에서 Release 배포
+
 ## 5주차 — 비동기 협업 체계
 
 - [제출용 Wiki 홈](https://github.com/vicircle22/OSS/wiki)

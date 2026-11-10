@@ -1,0 +1,8 @@
+[tool.ruff]
+target-version = "py312"
+extend-exclude = ["dist", "build", ".venv"]
+
+[tool.ruff.lint]
+# Syntax, undefined names, unused imports and other Pyflakes errors.
+# Formatting-only rewrites of earlier coursework are intentionally out of scope.
+select = ["E9", "F"]
