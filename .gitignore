@@ -19,3 +19,8 @@ Thumbs.db
 __pycache__/
 *.pyc
 dora-output/
+.venv/
+.ruff_cache/
+unpacked/
+incoming/
+release-check/
