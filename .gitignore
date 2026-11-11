@@ -24,3 +24,4 @@ dora-output/
 unpacked/
 incoming/
 release-check/
+.ci-venv/
