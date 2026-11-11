@@ -11,7 +11,7 @@
 - [최적화 전 7주차 성공 실행](https://github.com/vicircle22/OSS/actions/runs/42771295275)
 
 비교 보고서는 Cache Benchmark 실행의 Summary와 `cache-benchmark-report` 아티팩트에서 생성합니다.
-실측 후 동일 보고서를 docs/Week8-Performance.md로 보존합니다. 수치를 미리 채우지 않습니다.
+[실측 전후 비교 보고서](Week8-Performance.md)에 같은 보고서와 원측정값을 보존했습니다. 준비 시간과 Job 전체 시간을 구분합니다.
 
 ## 구현
 
@@ -34,6 +34,7 @@
 - rename은 삭제·추가 경로 모두 비교하므로 코드 삭제/문서 이동을 놓치지 않습니다.
 - 수동 실행은 변경 파일과 무관하게 검증을 강제합니다. Deploy는 여전히 main에서만 가능합니다.
 - 문서 전용 변경은 다음 코드 배포 패키지에 포함되며 그때마다 새 Release를 만들지는 않습니다.
+- 기존 PR Quality의 간단한 검사는 별도 Workflow로 유지합니다. 여기서 생략하는 것은 무거운 Build/9개 Matrix/Deploy입니다.
 
 실제 결정은 `Detect changed files` Job Summary의 ci_required/deploy_required·변경 목록으로 확인합니다.
 선택기 자체와 캐시 보고서의 조건 불일치·음수 개선율 처리도 테스트합니다.
