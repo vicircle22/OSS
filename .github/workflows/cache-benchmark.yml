@@ -1,0 +1,102 @@
+name: Cache Benchmark
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/actions/python-environment/**'
+      - '.github/workflows/reusable-python-checks.yml'
+      - '.github/workflows/cache-benchmark.yml'
+      - 'scripts/ci/dependencies.py'
+      - 'scripts/ci/cache_report.py'
+      - 'requirements-ci.txt'
+permissions:
+  contents: read
+concurrency:
+  group: cache-benchmark-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    outputs:
+      artifact_name: benchmark-build-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - run: python scripts/ci/package.py build --out dist --revision "$GITHUB_SHA"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: benchmark-build-${{ github.run_id }}-${{ github.run_attempt }}
+          path: dist/
+          if-no-files-found: error
+  baseline:
+    name: No cache
+    needs: build
+    uses: ./.github/workflows/reusable-python-checks.yml
+    with:
+      os: ubuntu-24.04
+      python_version: '3.12'
+      artifact_name: ${{ needs.build.outputs.artifact_name }}
+      revision: ${{ github.sha }}
+      label: baseline
+      use_cache: false
+  cold:
+    name: Cache cold
+    needs: [build, baseline]
+    uses: ./.github/workflows/reusable-python-checks.yml
+    with:
+      os: ubuntu-24.04
+      python_version: '3.12'
+      artifact_name: ${{ needs.build.outputs.artifact_name }}
+      revision: ${{ github.sha }}
+      label: cold
+      use_cache: true
+      cache_namespace: benchmark-${{ github.run_id }}-${{ github.run_attempt }}
+  warm:
+    name: Cache warm
+    needs: [build, cold]
+    uses: ./.github/workflows/reusable-python-checks.yml
+    with:
+      os: ubuntu-24.04
+      python_version: '3.12'
+      artifact_name: ${{ needs.build.outputs.artifact_name }}
+      revision: ${{ github.sha }}
+      label: warm
+      use_cache: true
+      cache_namespace: benchmark-${{ github.run_id }}-${{ github.run_attempt }}
+  report:
+    name: Report measured comparison
+    needs: [baseline, cold, warm]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          pattern: checks-*
+          path: measurements
+      - name: Collect actual Job durations
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs?per_page=100" > jobs.json
+      - name: Generate comparison without invented values
+        run: python scripts/ci/cache_report.py --measurements measurements --jobs jobs.json --out comparison
+      - run: cat comparison/report.md | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: cache-benchmark-report
+          path: |
+            comparison/
+            jobs.json
+          if-no-files-found: error

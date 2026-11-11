@@ -4,6 +4,12 @@ OSS 개발 과목 프로젝트 REPO
 
 컴퓨터공학과 이승원, 컴퓨터공학과 이규호 공동 작업
 
+## 8주차 — 워크플로우 최적화
+
+- [구현·제출 안내](docs/Week8-Submission.md): 9개 Matrix, Reusable Workflow·Composite Action, 캐시, 변경 파일 기반 선택 배포
+- [캐시 비교 실행·보고서](https://github.com/vicircle22/OSS/actions/workflows/cache-benchmark.yml)
+- [최적화 CI/CD 실행](https://github.com/vicircle22/OSS/actions/workflows/python-ci-cd.yml)
+
 ## 7주차 — Python CI/CD
 
 - [Workflow YAML](.github/workflows/python-ci-cd.yml) · [Actions 실행 내역](https://github.com/vicircle22/OSS/actions/workflows/python-ci-cd.yml)

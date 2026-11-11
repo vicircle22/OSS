@@ -1,0 +1,44 @@
+name: Cached Python environment
+description: Reuse exact Python/dependency environments and measure cache preparation time
+inputs:
+  python_version:
+    required: true
+    description: Python version
+  cache_enabled:
+    default: 'true'
+    description: Enable exact-key environment cache
+  cache_namespace:
+    default: production-v1
+    description: Isolated key namespace; benchmarks use their run ID
+outputs:
+  python_path:
+    description: Prepared interpreter with pinned Ruff
+    value: ${{ steps.prepare.outputs.python_path }}
+  dependency_seconds:
+    description: Measured restore/prepare time excluding Python selection and post-save
+    value: ${{ steps.prepare.outputs.dependency_seconds }}
+  cache_hit:
+    description: Exact cache hit
+    value: ${{ steps.prepare.outputs.cache_hit }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+      id: python
+      with:
+        python-version: ${{ inputs.python_version }}
+    - id: clock
+      shell: bash
+      run: python -c "import os,time; open(os.environ['GITHUB_OUTPUT'],'a').write('started='+str(time.perf_counter())+'\n')"
+    - id: cache
+      if: inputs.cache_enabled == 'true'
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: .ci-venv
+        key: venv-${{ inputs.cache_namespace }}-${{ runner.os }}-${{ runner.arch }}-${{ steps.python.outputs.python-version }}-${{ hashFiles('requirements-ci.txt') }}
+    - id: prepare
+      shell: bash
+      env:
+        STARTED: ${{ steps.clock.outputs.started }}
+        CACHE_HIT: ${{ steps.cache.outputs.cache-hit || 'false' }}
+      run: python scripts/ci/dependencies.py --started "$STARTED" --cache-hit "$CACHE_HIT"
